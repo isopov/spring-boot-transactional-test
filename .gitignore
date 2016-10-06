@@ -1,0 +1,18 @@
+### Maven ###
+target/
+
+### Eclipse ###
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### Idea ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Gedit ###
+*~
