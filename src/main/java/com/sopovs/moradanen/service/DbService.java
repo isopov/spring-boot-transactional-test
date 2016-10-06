@@ -1,32 +1,22 @@
 package com.sopovs.moradanen.service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class DbService {
-	private final DataSource ds;
+	private final JdbcTemplate template;
 
 	@Autowired
-	public DbService(DataSource ds) {
-		this.ds = ds;
+	public DbService(JdbcTemplate template) {
+		this.template = template;
 	}
 
 	public void foo() {
-		try (Connection con = ds.getConnection();
-				PreparedStatement pst = con.prepareStatement("insert into foobar(val) values(?)")) {
-			pst.setString(1, "foobar");
-			pst.executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-
+		template.execute("insert into foobar(val) values('foobar')");
 	}
 
 }
